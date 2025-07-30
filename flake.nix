@@ -11,8 +11,8 @@
     system = "aarch64-darwin";
   in{
     packages.${system} = {
-      test = pkgs.stdenv.mkDerivation {
-        pname = "test";
+      cat = pkgs.stdenv.mkDerivation {
+        pname = "cat";
         version = "1.0";
 
         src = ./.;  # No source code, just a simple derivation
@@ -22,12 +22,12 @@
         '';
 
         installPhase = ''
-          mkdir -p $out/share/plymouth/themes/test
-          cp -r $src/* $out/share/plymouth/themes/test
-          find $out/share/plymouth/themes/test -name \*.plymouth -exec sed -i "s@\/usr\/@$out\/@" {} \; # Adjust paths to point to the nix derivation
+          mkdir -p $out/share/plymouth/themes/cat
+          cp -r $src/* $out/share/plymouth/themes/cat
+          find $out/share/plymouth/themes/cat -name \*.plymouth -exec sed -i "s@\/usr\/@$out\/@" {} \; # Adjust paths to point to the nix derivation
         '';
       };
-      default = self.packages.${system}.test;
+      default = self.packages.${system}.cat;
     };
   };
 }
